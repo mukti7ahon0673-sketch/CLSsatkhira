@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cambridge International School, Satkhira</title>
+<meta name="description" content="Cambridge International School, Satkhira — Knowledge is Power, Education is Key.">
+<style>
+:root{--navy:#111f73;--blue:#2439b8;--gold:#e5b62d;--light:#f5f7ff;--ink:#182033;--muted:#65708a;--white:#fff;--line:#e5e8f2;--green:#159b62}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,Arial,sans-serif;color:var(--ink);background:#fff;line-height:1.6}a{text-decoration:none;color:inherit}
+.container{width:min(1160px,92%);margin:auto}.top{background:var(--navy);color:#fff;font-size:13px}.top .container{display:flex;justify-content:space-between;padding:8px 0;gap:15px;flex-wrap:wrap}
+header{position:sticky;top:0;z-index:50;background:#fff;box-shadow:0 4px 20px #101d7320}.nav{min-height:78px;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:12px}.brand img{width:56px;height:56px;object-fit:contain}.brand b{display:block;color:var(--navy);font-size:18px}.brand small{color:var(--muted);font-size:11px}.links{display:flex;gap:23px;font-weight:700;font-size:14px}.links a:hover{color:var(--blue)}.menu{display:none;border:0;background:none;font-size:28px;color:var(--navy);cursor:pointer}
+@media(max-width:820px){.menu{display:block}.links{display:none;position:absolute;left:12px;right:12px;top:72px;background:#fff;padding:12px;flex-direction:column;gap:0;border-radius:14px;box-shadow:0 15px 35px #0002;border:1px solid var(--line)}.links.open{display:flex}.links a{padding:13px 12px;border-bottom:1px solid var(--line);font-size:15px}.links a:last-child{border-bottom:0}}
+.hero{min-height:590px;background:linear-gradient(115deg,#09134ddd,#1d38b7cc),url('images/campus.jpg') center/cover;display:flex;align-items:center;color:#fff}.hero-inner{padding:80px 0;max-width:800px}.pill{display:inline-block;background:#ffffff18;border:1px solid #ffffff55;border-radius:99px;padding:7px 13px;font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase}.hero h1{font-size:clamp(38px,6vw,68px);line-height:1.06;margin:17px 0 14px}.hero h1 span{color:#ffd85c}.hero p{font-size:19px;max-width:650px;color:#eef1ff}.buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:27px}.btn{padding:13px 20px;border-radius:9px;font-weight:800;display:inline-block}.primary{background:var(--gold);color:#111f73}.ghost{border:1px solid #fff8;color:#fff}
+section{padding:78px 0}.head{text-align:center;max-width:720px;margin:0 auto 42px}.head span{font-size:12px;font-weight:900;color:var(--blue);letter-spacing:2px;text-transform:uppercase}.head h2{font-size:38px;color:var(--navy);margin:6px 0}.head p{color:var(--muted)}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}.logo-card{min-height:360px;border-radius:20px;background:linear-gradient(145deg,#f3f5ff,#e8edff);display:grid;place-items:center;box-shadow:0 18px 50px #101d7314}.logo-card img{width:min(70%,330px);max-height:320px;object-fit:contain}.about h2{font-size:40px;line-height:1.15;color:var(--navy);margin:8px 0 16px}.about p{color:var(--muted)}
+.stats{background:var(--light)}.statgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:17px}.stat{background:#fff;padding:25px;border-radius:15px;text-align:center;box-shadow:0 10px 30px #101d730c}.stat b{font-size:29px;color:var(--blue);display:block}.stat span{font-size:13px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.card{padding:27px;border:1px solid var(--line);border-radius:15px;background:#fff}.ico{font-size:30px}.card h3{color:var(--navy);margin:10px 0 5px}.card p{font-size:14px;color:var(--muted)}
+.notice-area{background:var(--light)}.notices{max-width:900px;margin:auto}.notice{display:flex;gap:17px;padding:18px 0;border-bottom:1px solid var(--line)}.date{min-width:70px;background:var(--navy);color:#fff;border-radius:9px;text-align:center;padding:5px}.date b{display:block;font-size:20px}.date small{font-size:10px}.notice h3{margin:0;color:var(--navy);font-size:16px}.notice p{margin:2px 0;color:var(--muted);font-size:13px}
+.admin{background:#0d185f;color:#fff}.admin .head h2{color:#fff}.admin .head p{color:#c8d0f5}.admin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.admin-card{background:#ffffff10;border:1px solid #ffffff20;border-radius:14px;padding:20px}.admin-card b{display:block;font-size:15px}.admin-card span{color:#cbd2fa;font-size:12px}
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:35px}.contactbox{padding:30px;background:var(--light);border-radius:18px}.contactbox h3{color:var(--navy)}.contactbox p{color:var(--muted)}.map{min-height:310px;border-radius:18px;background:linear-gradient(135deg,#dfe6ff,#f2f4ff);display:grid;place-items:center;text-align:center;color:var(--navy);font-weight:800;padding:25px}
+footer{background:#081247;color:#bbc5ef;padding:45px 0 18px}.foot{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:40px}.foot h3{color:#fff}.foot a{display:block;margin:5px 0;font-size:13px}.copy{text-align:center;border-top:1px solid #ffffff18;margin-top:30px;padding-top:16px;font-size:12px}
+@media(max-width:820px){.about,.contact{grid-template-columns:1fr}.statgrid{grid-template-columns:1fr 1fr}.cards{grid-template-columns:1fr}.admin-grid{grid-template-columns:1fr 1fr}.foot{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.top{display:none}.hero{min-height:520px}.hero p{font-size:16px}.statgrid,.admin-grid,.foot{grid-template-columns:1fr 1fr}section{padding:60px 0}.brand b{font-size:15px}}
+</style>
+</head>
+<body>
+<div class="top"><div class="container"><span>📍 Mehedibag, Rosulpur, Satkhira</span><span>🎓 Semi English Medium</span></div></div>
+<header><nav class="container nav">
+<a class="brand" href="#home"><img src="logo.jpg" alt="Cambridge International School logo"><div><b>Cambridge International School</b><small>Satkhira • Semi English Medium</small></div></a>
+<button class="menu" aria-label="Open menu" onclick="document.querySelector('.links').classList.toggle('open')">☰</button>
+<div class="links">
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="#academics">Academics</a>
+<a href="announcements.html">📢 Announcements</a>
+<a href="#admission">Admission</a>
+<a href="contact.html">Contact</a>
+<a href="teachers.html">👨‍🏫 Teachers</a>
+<a href="rules.html">📜 Rules</a>
+<a href="admin.html">🔐 Admin</a>
+</div>
+</nav></header>
+
+<main id="home">
+<section class="hero"><div class="container hero-inner">
+<span class="pill">Cambridge International School • Satkhira</span>
+<h1>Knowledge is <span>Power</span>.<br>Education is <span>Key</span>.</h1>
+<p>A modern semi-English-medium learning environment where students build knowledge, confidence, character and the skills they need for the future.</p>
+<div class="buttons"><a class="btn primary" href="#admission">Admission Information</a><a class="btn ghost" href="#about">Explore Our School</a></div>
+</div></section>
+
+<section id="about"><div class="container about">
+<div class="logo-card"><img src="logo.jpg" alt="School logo"></div>
+<div><span class="pill" style="color:var(--blue);border-color:#b9c4f4;background:#eef1ff">About our school</span><h2>A place to learn, grow & lead.</h2>
+<p>Cambridge International School, Satkhira is a semi-English-medium school focused on quality education, discipline, creativity and the overall development of students.</p>
+<p>We aim to create a safe and inspiring environment where every learner can discover their potential and prepare confidently for the future.</p>
+<a class="btn primary" href="#contact">Contact the School</a></div>
+</div></section>
+
+<section class="stats"><div class="container statgrid">
+<div class="stat"><b>📚</b><span>Academic Excellence</span></div><div class="stat"><b>🎓</b><span>Semi English Medium</span></div><div class="stat"><b>🌱</b><span>Character Building</span></div><div class="stat"><b>🏫</b><span>Student-Centered Learning</span></div>
+</div></section>
+<section id="school-pages" style="padding:70px 0;background:#fff;">
+  <div class="container">
+
+    <div class="head">
+      <span>Explore our school</span>
+      <h2>Everything you need</h2>
+      <p>Quickly find school information, teachers, announcements, rules and contact details.</p>
+    </div>
+
+    <div class="cards">
+
+      <a class="card" href="about.html" style="display:block;">
+        <div class="ico">🏫</div>
+        <h3>About Us</h3>
+        <p>Learn about our school, mission, vision, achievements and facilities.</p>
+        <span style="color:var(--blue);font-weight:800;">Explore About Us →</span>
+      </a>
+
+      <a class="card" href="teachers.html" style="display:block;">
+        <div class="ico">👨‍🏫</div>
+        <h3>Teachers & Staff</h3>
+        <p>Meet our teachers and staff. Teacher profiles will be added soon.</p>
+        <span style="color:var(--blue);font-weight:800;">Meet the Teachers →</span>
+      </a>
+
+      <a class="card" href="announcements.html" style="display:block;">
+        <div class="ico">📢</div>
+        <h3>Announcements</h3>
+        <p>Check important notices, events, holidays and school updates.</p>
+        <span style="color:var(--blue);font-weight:800;">View Announcements →</span>
+      </a>
+
+      <a class="card" href="rules.html" style="display:block;">
+        <div class="ico">📜</div>
+        <h3>Rules & Regulations</h3>
+        <p>See the school's discipline, attendance, uniform and other guidelines.</p>
+        <span style="color:var(--blue);font-weight:800;">View Rules →</span>
+      </a>
+
+      <a class="card" href="contact.html" style="display:block;">
+        <div class="ico">📞</div>
+        <h3>Contact Us</h3>
+        <p>Find the school address, office contact details and location.</p>
+        <span style="color:var(--blue);font-weight:800;">Contact School →</span>
+      </a>
+
+      <a class="card" href="#notices" style="display:block;">
+        <div class="ico">📰</div>
+        <h3>Latest Notices</h3>
+        <p>Jump straight to the notices section on the homepage.</p>
+        <span style="color:var(--blue);font-weight:800;">See Latest →</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+<section id="academics"><div class="container"><div class="head"><span>Our focus</span><h2>Education beyond textbooks</h2><p>Strong academics paired with skills, values and activities that help students become confident individuals.</p></div>
+<div class="cards">
+<div class="card"><div class="ico">📚</div><h3>Academic Programs</h3><p>Structured learning with a focus on strong foundations, understanding and practical knowledge.</p></div>
+<div class="card"><div class="ico">🧠</div><h3>Student Development</h3><p>Encouraging communication, creativity, critical thinking, discipline and confidence.</p></div>
+<div class="card"><div class="ico">🏆</div><h3>Co-Curricular Activities</h3><p>Sports, cultural activities, competitions and opportunities for students to explore their talents.</p></div>
+</div></div></section>
+
+<section id="notices" class="notice-area"><div class="container"><div class="head"><span>Stay updated</span><h2>School Notices</h2><p>Important announcements can be posted here by the school administration.</p></div>
+<div class="notices">
+<div class="notice"><div class="date"><b>NEW</b><small>2026</small></div><div><h3>Welcome to the Cambridge International School website</h3><p>Official school updates, announcements and important information will appear here.</p></div></div>
+<div class="notice"><div class="date"><b>INFO</b><small>ADM</small></div><div><h3>Admission enquiries</h3><p>Contact the school office for current admission dates, requirements and fees.</p></div></div>
+</div></div></section>
+
+<section id="admission" class="admin"><div class="container"><div class="head"><span style="color:#ffd85c">Admissions</span><h2>Start your journey with us</h2><p>Parents and guardians can contact the school for admission information, available classes and requirements.</p><div class="buttons" style="justify-content:center"><a class="btn primary" href="#contact">Admission Enquiry</a></div></div></div></section>
+
+<section id="admin"><div class="container"><div class="head"><span>Management system</span><h2>School Administration Dashboard</h2><p>The school is prepared for a future secure Super Admin panel with the following modules.</p></div>
+<div class="admin-grid">
+<div class="admin-card"><b>🔐 Super Admin Login</b><span>Secure administrator access</span></div>
+<div class="admin-card"><b>📊 Dashboard</b><span>School overview & statistics</span></div>
+<div class="admin-card"><b>👨‍🎓 Student Management</b><span>Student records</span></div>
+<div class="admin-card"><b>🏫 Class Management</b><span>Classes & sections</span></div>
+<div class="admin-card"><b>👨‍🏫 Teacher Management</b><span>Teacher records</span></div>
+<div class="admin-card"><b>🟢 Attendance</b><span>Daily attendance</span></div>
+<div class="admin-card"><b>📝 Examination & Result</b><span>Marks & report cards</span></div>
+<div class="admin-card"><b>💰 Fee & Due Management</b><span>Fees & outstanding dues</span></div>
+<div class="admin-card"><b>📢 Notice</b><span>Publish announcements</span></div>
+<div class="admin-card"><b>🖼️ Gallery</b><span>Manage school photos</span></div>
+<div class="admin-card"><b>📚 Academic Information</b><span>Classes & subjects</span></div>
+<div class="admin-card"><b>📈 Reports</b><span>Generate school reports</span></div>
+<div class="admin-card"><b>⚙️ Website Settings</b><span>Control website content</span></div>
+<div class="admin-card"><b>💳 Online Payment</b><span>Payment-ready section</span></div>
+<div class="admin-card"><b>📱 Mobile Ready</b><span>Designed for phones</span></div>
+</div></div></section>
+
+<section id="contact"><div class="container"><div class="head"><span>Get in touch</span><h2>Contact Cambridge International School</h2></div>
+<div class="contact"><div class="contactbox"><h3>School Office</h3><p>📍 Mehedibag, Rosulpur, Satkhira, Bangladesh</p><p>📞 <strong>Add school phone number</strong></p><p>✉️ <strong>Add official email</strong></p><p>🕘 <strong>8am-1pm</strong></p><p>For admissions, fees, results and other official information, please contact the school office.</p></div>
+<div class="map">📍<br>Mehedibag, Rosulpur<br>Satkhira, Bangladesh<br><small style="font-weight:400">Cambridge International School</small></div></div></div></section>
+</main>
+
+<footer><div class="container foot">
+<div><h3>Cambridge International School</h3><p>Knowledge is Power, Education is Key.</p><p>Bangla Medium • Mehedibag, Rosulpur, Satkhira</p></div>
+<div><h3>Quick Links</h3><a href="#about">About</a><a href="#academics">Academics</a><a href="#notices">Notices</a><a href="#admission">Admission</a></div>
+<div><h3>Administration</h3><a href="#admin">Management Modules</a><a href="#contact">Contact</a></div>
+</div><div class="container copy">© 2026 Cambridge International School, Satkhira. All rights reserved.</div></footer>
+<script>document.querySelectorAll('.links a').forEach(a=>a.onclick=()=>document.querySelector('.links').classList.remove('open'));</script>
+</body></html>
