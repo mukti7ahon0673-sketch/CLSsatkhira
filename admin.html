@@ -3,7 +3,7 @@
 <style>*{box-sizing:border-box}body{margin:0;font-family:Arial;background:#f4f6fb;color:#182033}header{background:#111f73;color:#fff;padding:22px 18px;position:sticky;top:0}header h1{font-size:22px;margin:0 0 5px}header p{margin:0;opacity:.8;font-size:13px}main{max-width:650px;margin:auto;padding:14px}.card{background:#fff;border-radius:18px;padding:18px;margin:12px 0;box-shadow:0 5px 20px #0001}h2{font-size:19px;margin:0 0 14px}.label{font-size:13px;font-weight:bold;display:block;margin:12px 0 6px}input,textarea{width:100%;padding:14px;border:1px solid #d9deeb;border-radius:12px;font-size:16px}textarea{min-height:110px}button{width:100%;border:0;border-radius:12px;padding:14px;font-size:16px;font-weight:bold;background:#2439b8;color:white;margin-top:12px}.green{background:#159b62}.red{background:#b42318}.hidden{display:none}.tabs{display:grid;grid-template-columns:1fr 1fr;gap:9px}.tabs button{margin:0;background:#e9edff;color:#2439b8}.tabs .active{background:#2439b8;color:#fff}.item{border:1px solid #e2e6f0;border-radius:13px;padding:13px;margin-top:10px}.item b{display:block;margin-bottom:5px}.muted{color:#65708a;font-size:13px}.small{width:auto;padding:9px 12px;font-size:13px}.warn{background:#fff7df;border:1px solid #f0d27a;padding:12px;border-radius:12px;font-size:13px;line-height:1.5}.status{padding:10px;border-radius:10px;background:#eef3ff;margin-top:10px;font-size:13px}</style></head><body>
 <header><h1>🏫 CIS Admin</h1><p>Cambridge International School • Satkhira</p></header><main>
 <section id="login" class="card"><h2>🔐 Admin Login</h2><label class="label">Password</label><input id="pw" type="password" placeholder="Enter admin password"><button onclick="login()">LOGIN</button><p id="msg"></p></section>
-<section id="setup" class="card hidden"><h2>⚙️ GitHub Setup</h2><div class="warn">Your GitHub token is used only in this browser session. Do not share it.</div><label class="label">GitHub Personal Access Token</label><input id="token" type="password" placeholder="Paste token here"><button onclick="saveToken()">CONNECT GITHUB</button><p id="setupMsg"></p></section>
+<section id="setup" class="card hidden"><h2>⚙️ GitHub Setup</h2><div class="warn">Your GitHub token is used only in this browser session. Do not share it.</div><label class="label">GitHub Personal Access Token</label><input id="token" type="password" placeholder="Paste token here"><button id="connectBtn" type="button">CONNECT GITHUB</button><p id="setupMsg" role="status" aria-live="polite"></p></section>
 <section id="app" class="hidden"><div class="tabs"><button id="at" class="active" onclick="tab('ann')">📢 Announcements</button><button id="rt" onclick="tab('res')">📊 Results</button></div>
 <div id="ann" class="card"><h2>📢 New Announcement</h2><label class="label">Title</label><input id="title" placeholder="e.g. School will remain closed"><label class="label">Message</label><textarea id="text" placeholder="Write your announcement..."></textarea><label class="label">Date</label><input id="date" type="date"><button class="green" onclick="addA()">PUBLISH ANNOUNCEMENT</button><div id="alist"></div></div>
 <div id="res" class="card hidden"><h2>📊 New Result</h2><p class="muted">Results remain local in this version.</p><label class="label">Exam</label><input id="exam" placeholder="e.g. Half Yearly Examination"><label class="label">Class</label><input id="cls" placeholder="e.g. Class 7"><label class="label">Student name</label><input id="name" placeholder="Student name"><label class="label">Roll</label><input id="roll" placeholder="Roll number"><label class="label">Marks / Grade</label><input id="marks" placeholder="e.g. 85% or A+"><button class="green" onclick="addR()">SAVE RESULT</button><div id="rlist"></div></div>
@@ -19,13 +19,23 @@ function login(){
     else $("setup").classList.remove("hidden");
   } else $("msg").textContent = "❌ Wrong password";
 }
-function saveToken(){
+async function saveToken(){
   const t = $("token").value.trim();
   if(!t){ $("setupMsg").textContent = "❌ Paste your token first."; return; }
-  sessionStorage.setItem("cisGithubToken",);
-  $("setup").classList.add("hidden"); $("app").classList.remove("hidden");
-  $("status").textContent = "Checking GitHub connection…";
-  checkConnection(); render();
+  const btn = $("connectBtn");
+  btn.disabled = true; btn.textContent = "CONNECTING…";
+  $("setupMsg").textContent = "Checking token and repository…";
+  try {
+    sessionStorage.setItem("cisGithubToken", t);
+    const me = await githubRequest("https://api.github.com/repos/" + OWNER + "/" + REPO);
+    if(!me || !me.full_name) throw Error("GitHub did not confirm the repository.");
+    $("setup").classList.add("hidden"); $("app").classList.remove("hidden");
+    $("status").textContent = "✅ Token accepted. Loading school data…";
+    await checkConnection(); render();
+  } catch(e) {
+    sessionStorage.removeItem("cisGithubToken");
+    $("setupMsg").textContent = "❌ Connect failed: " + (e && e.message ? e.message : "Unknown error") + ". Check token permissions and repository access.";
+  } finally { btn.disabled = false; btn.textContent = "CONNECT GITHUB"; }
 }
 function disconnect(){sessionStorage.removeItem("cisGithubToken");$("app").classList.add("hidden");$("setup").classList.remove("hidden");$("token").value="";$("setupMsg").textContent="";$("status").textContent="Not connected";}
 async function githubRequest(url, options={}){
@@ -63,4 +73,5 @@ function tab(x){$("ann").classList.toggle("hidden",x!=="ann");$("res").classList
 function render(){$("alist").innerHTML=A.length?A.map((x,i)=>`<div class="item"><b>${e(x.title)}</b><div>${e(x.message||"")}</div><span class="muted">${e(x.date||"")}</span><br><button class="small red" onclick="delA(${i})">Delete</button></div>`).join(""):"<p class='muted'>No announcements yet.</p>";$("rlist").innerHTML=R.length?R.map(x=>`<div class="item"><b>${e(x.name)}</b><div>${e(x.marks)} • ${e(x.cls)} • Roll ${e(x.roll)}</div><span class="muted">${e(x.exam)}</span></div>`).join(""):"<p class='muted'>No results yet.</p>";}
 function e(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));}
 render();
+$("connectBtn").addEventListener("click", saveToken);
 </script></body></html>
