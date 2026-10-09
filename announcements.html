@@ -1,2 +1,36 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Announcements | Cambridge International School</title><style>
-body{font-family:Arial,sans-serif;margin:0;color:#182033;background:#f5f7ff}header{background:#111f73;color:white;padding:18px 6%;display:flex;align-items:center;gap:14px}header img{width:52px;height:52px;object-fit:contain;background:white;border-radius:8px}.wrap{max-width:900px;margin:40px auto;padding:0 20px}.back{color:#2439b8;font-weight:bold;text-decoration:none}.notice{background:white;margin:18px 0;padding:22px;border-radius:14px;border-left:5px solid #2439b8;box-shadow:0 8px 25px #0001}.date{font-size:12px;color:#65708a;font-weight:bold}.notice h2{margin:7px 0}.notice p{color:#65708a}.footer{text-align:center;padding:30px;color:#65708a}</style></head><body><header><img src="logo.jpg" alt="School logo"><div><b>Cambridge International School</b><br><small>Official Announcements</small></div></header><main class="wrap"><a class="back" href="index.html">← Back to Home</a><h1>📢 Announcements & Notices</h1><p>New school announcements can be added here later.</p><div class="notice"><div class="date">LATEST • 2026</div><h2>Welcome to the official school website</h2><p>Important notices, events, holidays, examination updates and admission announcements will appear on this page.</p></div><div class="notice"><div class="date">ADMISSION</div><h2>Admission information</h2><p>Contact the school office for current admission dates, requirements and fees.</p></div><div class="notice"><div class="date">YOUR NEXT NOTICE</div><h2>Add your announcement here</h2><p>This placeholder can be replaced with your school's actual notice whenever you are ready.</p></div></main><div class="footer">© 2026 Cambridge International School, Satkhira</div></body></html>
+body{font-family:Arial,sans-serif;margin:0;color:#182033;background:#f5f7ff}header{background:#111f73;color:white;padding:18px 6%;display:flex;align-items:center;gap:14px}header img{width:52px;height:52px;object-fit:contain;background:white;border-radius:8px}.wrap{max-width:900px;margin:40px auto;padding:0 20px}.back{color:#2439b8;font-weight:bold;text-decoration:none}.notice{background:white;margin:18px 0;padding:22px;border-radius:14px;border-left:5px solid #2439b8;box-shadow:0 8px 25px #0001}.date{font-size:12px;color:#65708a;font-weight:bold}.notice h2{margin:7px 0}.notice p{color:#65708a}.footer{text-align:center;padding:30px;color:#65708a}</style></head><body><header><img src="logo.jpg" alt="School logo"><div><b>Cambridge International School</b><br><small>Official Announcements</small></div></header><main class="wrap">
+<a class="back" href="index.html">← Back to Home</a>
+<h1>📢 Announcements & Notices</h1>
+<p>Official updates from Cambridge International School, Satkhira.</p>
+<div id="notice-list"><div class="notice"><h2>Loading announcements…</h2><p>Please wait.</p></div></div>
+</main><div class="footer">© 2026 Cambridge International School, Satkhira</div>
+<script>
+(async function(){
+  const list = document.getElementById("notice-list");
+  function escapeHtml(value){
+    return String(value == null ? "" : value).replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c];
+    });
+  }
+  try {
+    const response = await fetch("announcements-data.json?ts=" + Date.now(), {cache:"no-store"});
+    if (!response.ok) throw new Error("Could not load notices (" + response.status + ")");
+    const items = await response.json();
+    if (!Array.isArray(items) || items.length === 0) {
+      list.innerHTML = '<div class="notice"><h2>No announcements yet</h2><p>New school notices will appear here when published.</p></div>';
+      return;
+    }
+    list.innerHTML = items.map(function(item){
+      return '<article class="notice"><div class="date">' + escapeHtml(item.date || '') + '</div><h2>' +
+        escapeHtml(item.title || 'Announcement') + '</h2><p>' +
+        escapeHtml(item.message || '') + '</p></article>';
+    }).join("");
+  } catch (error) {
+    list.innerHTML = '<div class="notice"><h2>Announcements temporarily unavailable</h2><p>Please refresh this page later.</p></div>';
+    console.error(error);
+  }
+})();
+</script>
+
+</body></html>
