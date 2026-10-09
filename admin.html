@@ -10,7 +10,7 @@
 <div class="card"><h2>⚙️ Connection</h2><div id="status" class="status">Not connected</div><button class="red" onclick="disconnect()">CLEAR GITHUB TOKEN</button></div></section></main>
 <script>
 const $ = id => document.getElementById(id);
-const PASSWORD = "CISadmin123", OWNER = "mukti7ahon0673-sketch", REPO = "CLSSatkhira", BRANCH = "main", ANN_FILE = "announcements-data.json";
+const PASSWORD = "CISadmin123", OWNER = "mukti7ahon0673-sketch", REPO = "CLSsatkhira", BRANCH = "main", ANN_FILE = "announcements-data.json";
 let A = [], R = JSON.parse(localStorage.getItem("cisR") || "[]");
 function login(){
   if($("pw").value === PASSWORD){
@@ -22,7 +22,7 @@ function login(){
 function saveToken(){
   const t = $("token").value.trim();
   if(!t){ $("setupMsg").textContent = "❌ Paste your token first."; return; }
-  sessionStorage.setItem("cisGithubToken", t);
+  sessionStorage.setItem("cisGithubToken",);
   $("setup").classList.add("hidden"); $("app").classList.remove("hidden");
   $("status").textContent = "Checking GitHub connection…";
   checkConnection(); render();
